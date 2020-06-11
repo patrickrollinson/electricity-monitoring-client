@@ -1,0 +1,48 @@
+<mat-card-title>
+    Circuits</mat-card-title>
+<mat-card-content>
+    <mat-table #table [dataSource]="portTable">
+        <!-- Name Column -->
+        <ng-container matColumnDef="port">
+            <mat-header-cell *matHeaderCellDef> Port </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.port}} </mat-cell>
+        </ng-container>
+
+        <!-- Energy Column -->
+        <ng-container matColumnDef="circuit">
+            <mat-header-cell *matHeaderCellDef>Circuit</mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+                <mat-icon matListIcon svgIcon={{element.type}} *ngIf="element.type"></mat-icon>
+                {{element.name}}
+            </mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span *ngIf="!element.id"></span>
+                    <span *ngIf="element.id">
+                        <button mat-button (click)="clickUpdateCircuit(element.id, element.port)"  [ngClass]= "{'exceeded': element.period_status==='exceeded', 'active': element.active}">
+                            <mat-icon>edit</mat-icon>
+                            Edit Circuit
+                        </button>
+                    </span>
+                    <span *ngIf="!element.id">
+                            <span *ngIf="element.cost_value !== 'No Limit Set'">
+                                
+                            </span>
+                            <span *ngIf="!element.cost_value">
+                                <button mat-button (click)="clickAddCircuit(element.port)"  [ngClass]= "{'exceeded': element.period_status==='exceeded', 'active': element.active}">
+                                        <mat-icon>add</mat-icon>
+                                        Add Circuit
+                                </button>
+                            </span>
+                        </span>
+                </mat-cell>
+            </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['port', 'circuit', 'action']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['port', 'circuit', 'action']"></mat-row>
+    </mat-table>
+
+</mat-card-content>

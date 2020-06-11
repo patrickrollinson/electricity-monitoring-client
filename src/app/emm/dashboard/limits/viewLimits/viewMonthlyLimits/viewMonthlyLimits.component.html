@@ -1,0 +1,124 @@
+<div style="margin: 10px">
+    <mat-card-title>Monthly Budget</mat-card-title>
+    <mat-card-content>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Month</th>
+                    <!-- <th scope="col">Actual</th> -->
+                    <th scope="col">Budget</th>
+                    <!-- <th scope="col">Status</th> -->
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let month of monthLimitsTable" [ngClass]="{'table-secondary': month.past, 'table-success': month.today}">
+                    <td>{{month.name}}</td>
+                    <!-- <td>R{{month.actual}}</td> -->
+                    <td>
+                        <span *ngIf="!month.budget && month.activity === 'none'">
+                            No Budget Set
+                        </span>
+                        <span *ngIf="month.budget > 0 && month.activity === 'none'">
+                            R{{month.budget}}
+                        </span>
+                        <span *ngIf="month.activity === 'add'">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">R</div>
+                                </div>
+                                <input type="number" class="form-control" id="inlineFormInputGroup" [(ngModel)]="costValue" placeholder="Amount">
+                            </div>
+                        </span>
+                        <span *ngIf="month.activity === 'edit'">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">R</div>
+                                </div>
+                                <input type="number" class="form-control" id="inlineFormInputGroup" [(ngModel)]="costValue" placeholder="Amount">
+                            </div>
+                        </span>
+                    </td>
+                    <td>
+                        <!-- NO ACTIVITY AND PAST -->
+                        <!-- //////////////////////////////////// IMPLEMENT WHEN MONTH AGGREGATIONS IMPLEMENTED /////////////////////////// -->
+                        <!-- <span *ngIf="month.activity === 'none' && month.past && month.explicit">
+                            <span *ngIf="month.limit">
+                                <span *ngIf="month.actual > month.budget">
+                                    <button class="btn btn-danger btn-sm ">
+                                        Exceeded
+                                    </button>
+                                </span>
+                                <span *ngIf="month.actual <= month.budget">
+                                    <button class="btn btn-success btn-sm ">
+                                        Kept
+                                    </button>
+                                </span>
+                            </span>
+                        </span> -->
+                    </td>
+                    <td>
+                        <!-- NO ACTIVITY  -->
+                        <span *ngIf="month.activity === 'none'">
+                            <!-- NO ACTIVTY AND TODAY -->
+                            <span *ngIf="month.today && month.explicit">
+                                <button mat-button (click)="clickUpdateLimit(month)">
+                                    <mat-icon>edit</mat-icon>
+                                    Edit Limit
+                                </button>
+                            </span>
+                            <span *ngIf="month.today && !month.explicit">
+                                <button mat-button (click)="clickSetLimit(month.date)">
+                                    <mat-icon>add</mat-icon>
+                                    Set Limit
+                                </button>
+                            </span>
+                            <!-- NO ACTIVITY AND FUTURE -->
+                            <span *ngIf="month.future && month.explicit">
+                                <button mat-button (click)="clickUpdateLimit(month)">
+                                    <mat-icon>edit</mat-icon>
+                                    Edit Limit
+                                </button>
+                            </span>
+                            <span *ngIf="month.future && !month.explicit">
+                                <button mat-button (click)="clickSetLimit(month.date)">
+                                    <mat-icon>add</mat-icon>
+                                    Set Limit
+                                </button>
+                            </span>
+                            
+                        </span>
+                         <!-- ADDING LIMIT -->
+                         <span *ngIf="month.activity === 'add'">
+                            <button mat-button (click)="addLimit(month.date)">
+                                <mat-icon>edit</mat-icon>
+                                Add
+                            </button>
+                            <button mat-button (click)="cancelAddLimit(month.date)">
+                                Cancel
+                            </button>
+                        </span>
+                        <!-- EDITINIG LIMIT -->
+                        <span *ngIf="month.activity === 'edit'">
+                            <button mat-button (click)="editLimit(month.date)">
+                                <mat-icon>edit</mat-icon>
+                                Update
+                            </button>
+                            <button mat-button (click)="cancelAddLimit(month.date)">
+                                Cancel
+                            </button>
+                        </span>
+                    </td>
+                    <td>
+                        <span *ngIf="month.activity === 'none'  && month.explicit">
+                            <button mat-raised-button color="primary" (click)="viewMonthDaily(month.date.month)">
+                                View Daily Limits
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</div>

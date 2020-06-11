@@ -1,0 +1,149 @@
+<mat-card *ngIf="updateClientContactDetailsForm" fxFlex>
+        <mat-card-title>Update Contact Details</mat-card-title>
+        <mat-card-content>
+                <form [formGroup]="updateClientContactDetailsForm" (ngSubmit)="onContactDetailsSubmit()">
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="First Name" class="form-control" formControlName="first_name">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Family Name" class="form-control" formControlName="family_name">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Contact Number" class="form-control" formControlName="contact_number">
+                        </mat-form-field>
+                        <br>
+                        <button mat-raised-button color="primary" type="submit">Update</button>
+                </form>
+        </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="updateClientAddressForm" fxFlex>
+        <mat-card-title>Update Address</mat-card-title>
+        <mat-card-content>
+                <form [formGroup]="updateClientAddressForm" (ngSubmit)="onAddressSubmit()">
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Country" class="form-control" formControlName="country">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="City" class="form-control" formControlName="city">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Suburb" class="form-control" formControlName="suburb">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Street" class="form-control" formControlName="street">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Street Number" class="form-control" formControlName="street_number">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Complex Name" class="form-control" formControlName="complex_name">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Unit Number" class="form-control" formControlName="unit_number">
+                        </mat-form-field>
+                        <br>
+                        <button mat-raised-button color="primary" type="submit">Update</button>
+                </form>
+        </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="updateClientSiteDetailsForm" fxFlex>
+        <mat-card-title>Update Site Details</mat-card-title>
+        <mat-card-content>
+                <form [formGroup]="updateClientSiteDetailsForm" (ngSubmit)="onSiteDetailsSubmit()">
+                        <label>Entity Type:</label>
+                        <br>
+                        <mat-radio-group class="form-control" formControlName="entity">
+                                <mat-radio-button value="Residential">Residential</mat-radio-button>
+                                <mat-radio-button value="Commercial">Commercial</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <br>
+                        <label>Dwelling Type:</label>
+                        <br>
+                        <mat-radio-group class="form-control" formControlName="dwelling_type">
+                                <mat-radio-button value="Free standing home">Free standing home</mat-radio-button>
+                                <mat-radio-button value="Town House">Town House</mat-radio-button>
+                                <mat-radio-button value="Apartment">Apartment</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <br>
+                        <label>Distribution Board Location:</label>
+                        <br>
+                        <mat-radio-group class="form-control" formControlName="db_location">
+                                <mat-radio-button value="kitchen">Kitchen</mat-radio-button>
+                                <mat-radio-button value="garage">Garage</mat-radio-button>
+                                <mat-radio-button value="lounge">Lounge</mat-radio-button>
+                                <mat-radio-button value="hall">Hall</mat-radio-button>
+                                <mat-radio-button value="other">Other</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <br>
+                        <label>Connection Type:</label>
+                        <br>
+                        <mat-radio-group class="form-control" formControlName="connection_type">
+                                <mat-radio-button value=3>Three Phase</mat-radio-button>
+                                <mat-radio-button value=1>Single Phase</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Main Breaker Size (Amperes)" class="form-control" formControlName="main_breaker_size">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Dwelling Area (m^2)" class="form-control" formControlName="dwelling_area">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Number of Occupants" class="form-control" formControlName="occupants">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Number of Bed Rooms" class="form-control" formControlName="bedrooms">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Number of Bath Rooms" class="form-control" formControlName="bathrooms">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="number" placeholder="Volume of Pool (Litres)" class="form-control" formControlName="pool_volume">
+                        </mat-form-field>
+                        <br>
+                        <br>
+                        <label>Type of Stove Top:</label>
+                        <br>
+                        <mat-radio-group class="form-control" formControlName="stove_top_type">
+                                <mat-radio-button value="induction">Induction</mat-radio-button>
+                                <mat-radio-button value="electric">Electric</mat-radio-button>
+                                <mat-radio-button value="gas">Gas</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <br>
+                        <label>Under Floor Heating</label>
+
+                        <br>
+                        <mat-radio-group class="form-control" formControlName="under_floor_heating">
+                                <mat-radio-button value='true'>Yes</mat-radio-button>
+                                <mat-radio-button value='false'>No</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <mat-form-field class="form-group">
+                                <input matInput type="string" placeholder="Comments" class="form-control" formControlName="comment">
+                        </mat-form-field>
+                        <br>
+                        <br>
+                        <button mat-raised-button color="primary" type="submit">Update</button>
+                </form>
+        </mat-card-content>
+</mat-card>

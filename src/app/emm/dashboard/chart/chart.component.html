@@ -1,0 +1,14 @@
+<div fxFlex="100%" style="height: 85vh;" *ngIf="time" id="graphDiv">
+    <mat-card-title *ngIf="!loading">{{time.label}}</mat-card-title>
+    <div *ngIf="loading" align="middle" style="margin: 20px">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        <h5 class="h5 mb-3 font-weight-normal text-center">Loading {{time.label}}'s Data</h5>
+        <p>
+            <small>Please wait, should be done shortly.</small>
+        </p>
+    </div>
+
+    <canvas id="timeSeriesChart" style="position: relative; height: 100%;"></canvas>
+
+
+</div>

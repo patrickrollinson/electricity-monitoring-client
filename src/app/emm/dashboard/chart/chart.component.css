@@ -1,0 +1,16 @@
+mat-card {
+    margin: 10px;
+    
+    
+}
+
+#timePeriodSelector {
+  color: rgb(22, 237, 94);
+}
+
+#graphDiv {
+  margin-top: 0px;
+  margin-bottom: 200px;
+  margin-right: 20px;
+  margin-left: 20px;
+}

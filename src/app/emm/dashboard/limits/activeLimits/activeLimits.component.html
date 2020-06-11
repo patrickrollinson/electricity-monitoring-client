@@ -1,0 +1,75 @@
+<div class="container-fluid" *ngIf="activeLimit" fxLayout fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center stetch">
+    <div fxFlex="60%">
+        <cumul-chart *ngIf="mainsCumul" [mainsCumul]="mainsCumul" [activeType]="activeType" [activeLimit]="activeLimit" [projectedValue]="projectedValue"></cumul-chart>
+        <div *ngIf="loading" align="middle">
+            <br>
+            <br>
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            <h5 class="h5 mb-3 font-weight-normal text-center">Loading Report Data</h5>
+            <p>
+                <small>Please wait, should be done shortly.</small>
+            </p>
+        </div>
+    </div>
+    <div fxFlex *ngIf="activeLimit" id="activeLimitReport">
+        <h2>{{activeLimit.name}} Limit:
+            <b>R{{activeLimit.cost_value}} ({{activeLimit.value}}kWh)</b>
+        </h2>
+        <div *ngIf="loading" align="middle">
+            <br>
+            <br>
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            <h5 class="h5 mb-3 font-weight-normal text-center">Loading Report Data</h5>
+            <p>
+                <small>Please wait, should be done shortly.</small>
+            </p>
+        </div>
+        <br>
+        <div id="dayProgressBar" *ngIf="activeLimit">
+            <div class="progress" style="width : '3rem'">
+                <div class="progress-bar" role="progressbar" [ngClass]="{'bg-danger': current.status === 'exceeded', 'bg-success': current.status === 'under'}" [ngStyle]="{width: current.percentStr}">{{current.percentStr}}</div>
+            </div>
+        </div>
+        <br>
+        <table class="table table-striped" *ngIf="current !== null && projected !== null">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">%</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">kWh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <h5>Current</h5>
+                    </td>
+                    <td>
+                        <span [ngClass]="{'text-danger': current.status === 'exceeded', 'text-success': current.status === 'under'}">{{current.percentStr}}</span>
+                    </td>
+                    <td>
+                        <span [ngClass]="{'text-danger': current.status === 'exceeded', 'text-success': current.status === 'under'}">R{{current.cost}}</span>
+                    </td>
+                    <td>
+                        <span [ngClass]="{'text-danger': current.status === 'exceeded', 'text-success': current.status === 'under'}">{{current.energy}}kWh</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>Projected</h5>
+                    </td>
+                    <td>
+                        <span [ngClass]="{'text-danger': projected.status === 'exceeded', 'text-success': projected.status === 'under'}">{{projected.percentStr}}</span>
+                    </td>
+                    <td>
+                        <span [ngClass]="{'text-danger': projected.status === 'exceeded', 'text-success': projected.status === 'under'}">R{{projected.cost}}</span>
+                    </td>
+                    <td>
+                        <span [ngClass]="{'text-danger': projected.status === 'exceeded', 'text-success': projected.status === 'under'}">{{projected.energy}}kWh</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<mat-card fxFlex *ngIf="clientDetails">
+	<mat-card-title-group>
+		<mat-card-title>Client Details</mat-card-title>
+		<mat-icon (click)='viewUpdateClient()'>mode_edit</mat-icon>
+	</mat-card-title-group>
+	<mat-card-content *ngIf="clientDetails">
+		<h6>Contact Details</h6>
+		<p>First Name: {{clientDetails.contact_details.first_name}} </p>
+		<p>Family Name: {{clientDetails.contact_details.family_name}} </p>
+		<p>Email: {{clientDetails.email}} </p>
+		<p>Contact Number: {{clientDetails.contact_details.contact_number}} </p>
+		<br>
+		<h6>Address</h6>
+		<p>Country: {{clientDetails.address.country}}</p>
+		<p>City: {{clientDetails.address.city}}</p>
+		<p>Suburb: {{clientDetails.address.suburb}}</p>
+		<p>Street Adress:{{clientDetails.address.street_number}} {{clientDetails.address.street}}</p>
+		<p>Complex: {{clientDetails.address.unit_number}} {{clientDetails.address.complex_name}} </p>
+		<br>
+		<h6>Site Details</h6>
+		<p>Entity: {{clientDetails.site_details.entity}} </p>
+		<p>Dwelling Type : {{clientDetails.site_details.dwelling_type}} </p>
+		<p>Number of Bedrooms: {{clientDetails.site_details.bedrooms}} </p>
+		<p>Number of Bathrooms: {{clientDetails.site_details.bathrooms}} </p>
+		<p>Phases: {{clientDetails.site_details.connection_type}} Phase </p>
+		<p>Main Breaker Size: {{clientDetails.site_details.main_breaker_size}} A</p>
+	</mat-card-content>
+</mat-card>
+
+<mat-card fxFlex *ngIf="clientDetails">
+
+	<mat-card-title>Electricity Monitoring</mat-card-title>
+	<mat-card-content>
+		<mat-nav-list>
+
+			<mat-list-item>
+				<h6>Installed Devices</h6>
+			</mat-list-item>
+			<mat-list-item *ngFor="let emm of clientDetails.emms_installed" [ngClass]="{emmActive: emm.status=='Active'}" (click)=viewEmm(emm._id)>
+				<mat-icon matListIcon>devices</mat-icon>
+				<h6 matLine>{{emm.name}} - {{emm.status}}</h6>
+			</mat-list-item>
+			<mat-list-item (click)="openAddEmm()">
+				<mat-icon matListIcon>add</mat-icon>
+				<h6 matLine>Add Device</h6>
+			</mat-list-item>
+		</mat-nav-list>
+	</mat-card-content>
+</mat-card>
+

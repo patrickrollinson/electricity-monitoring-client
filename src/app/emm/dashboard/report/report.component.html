@@ -1,0 +1,50 @@
+<div fxLayout fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center stetch">
+    <div id="reportChartCard" fxFlex="50%">
+        <mat-card-title>{{time.label}}</mat-card-title>
+        <div *ngIf="!reportData  && loading" align="middle">
+            <br>
+            <br>
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            <h5 class="h5 mb-3 font-weight-normal text-center">Loading Report Data</h5>
+            <p>
+                <small>Please wait, should be done shortly.</small>
+            </p>
+        </div>
+        <canvas id="pieChart" style="position: relative; width:90%;"></canvas>
+        <!-- <canvas id="reportChart"></canvas>
+        <canvas id="cumulChart"></canvas> -->
+
+    </div>
+
+
+    <div fxFlex id="reportCard">
+        <h2>Circuits Consumption</h2>
+        <table class="table" *ngIf="reportData">
+            <thead>
+                <tr>
+                    <th scope="col">Circuit</th>
+                    <th scope="col">Cost</th>
+                    <th scope="col">Energy</th>
+                    <th scope="col">%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let circuit of reportData.circuits">
+                    <td>{{circuit.name}}</td>
+                    <td>R {{circuit.totalCost}}</td>
+                    <td>{{circuit.totalEnergy}} kWh</td>
+                    <td>{{circuit.percent}} %</td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!reportData  && loading" align="middle">
+            <br>
+            <br>
+            <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+            <h5 class="h5 mb-3 font-weight-normal text-center">Loading Report Data</h5>
+            <p>
+                <small>Please wait, should be done shortly.</small>
+            </p>
+        </div>
+    </div>
+</div>

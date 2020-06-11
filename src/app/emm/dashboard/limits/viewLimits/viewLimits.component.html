@@ -1,0 +1,9 @@
+<div class = "container" *ngIf="viewLimitsView === 'view'">
+    <div fxFlex *ngIf="viewType === 'month'">
+        <view-monthly-limits [monthLimits]="monthLimits" [ctId]="ctId" (clickAddLimitEvent)='addMonthLimitInit($event)' (clickViewMonthDailyEvent)='changeViewMonthDaily($event)'></view-monthly-limits>
+    </div>
+    <div fxFlex *ngIf="viewType === 'day'"> 
+        <view-daily-limits [dayLimits]="dayLimits" [ctId]="ctId" [viewingMonth]='monthLimit' (viewMonthLimits)="changeViewMonth($event)"></view-daily-limits>
+    </div>
+</div>
+

@@ -1,0 +1,110 @@
+<mat-sidenav-container>
+	<mat-sidenav #sidenav id="dashboardOptions" mode="over" [(opened)]="opened">
+		<mat-nav-list style="width: 100%">
+			<h2 mat-subheader>Time Period: {{time.label}}</h2>
+			<mat-list-item>
+				<button mat-button class="change-time-chevron-left" (click)="changePastX(1)">
+					<mat-icon mat-icon-button *ngIf="pastXSelectedIndex !== pastXOptions.length -1">chevron_left</mat-icon>
+				</button>
+				<button mat-button (click)="selectPastX()" class="select-time-button">{{pastXSelected.label}}</button>
+				<button mat-button class="change-time-chevron-right" (click)="changePastX(0)">
+					<mat-icon mat-icon-button *ngIf="pastXSelectedIndex !== 0">chevron_right</mat-icon>
+				</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-button class="change-time-chevron-left" (click)="changeDay(1)">
+					<mat-icon mat-icon-button *ngIf="daySelectedIndex !== dayOptions.length -1">chevron_left</mat-icon>
+				</button>
+				<button mat-button (click)="selectDay()" class="select-time-button">
+					{{daySelected.label}}
+				</button>
+				<button mat-button class="change-time-chevron-right" (click)="changeDay(0)">
+					<mat-icon mat-icon-button *ngIf="daySelectedIndex !== 0">chevron_right</mat-icon>
+				</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-button class="change-time-chevron-left" (click)="changeMonth(1)">
+					<mat-icon mat-icon-button *ngIf="monthSelectedIndex !== monthOptions.length -1">chevron_left</mat-icon>
+				</button>
+				<button mat-button (click)="selectMonth()" class="select-time-button">
+					{{monthSelected.label}}
+				</button>
+				<button mat-button class="change-time-chevron-right" (click)="changeMonth(0)">
+					<mat-icon mat-icon-button *ngIf="monthSelectedIndex !== 0">chevron_right</mat-icon>
+				</button>
+			</mat-list-item>
+			<mat-divider></mat-divider>
+			<h2 mat-subheader>Units: </h2>
+			<mat-list-item>
+
+				<mat-button-toggle-group [(ngModel)]="format" style="width: 100%;">
+					<mat-button-toggle value="cost" style="width: 50%; text-align: center;">Cost</mat-button-toggle>
+					<mat-button-toggle value="energy" style="width: 50%; text-align: center;">Energy</mat-button-toggle>
+				</mat-button-toggle-group>
+
+			</mat-list-item>
+			<mat-divider></mat-divider>
+			<mat-list-item>
+				<button mat-raised-button color="primary" id="sidenav-close-button" (click)="sidenav.toggle()">Close</button>
+			</mat-list-item>
+		</mat-nav-list>
+
+
+	</mat-sidenav>
+	<mat-sidenav-content style="background: accent">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			 aria-expanded="false" aria-label="Toggle navigation">
+				<mat-icon>more_vert</mat-icon>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" (click)="sidenav.toggle()" *ngIf="showGraphOptions">
+							<mat-icon svgIcon="graphOptions"> </mat-icon>
+							Graph Options
+						</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" (click)="changeView('live')">
+							<mat-icon svgIcon="live"> </mat-icon>
+							Live
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" (click)="changeView('graph')">
+							<mat-icon svgIcon="graph"> </mat-icon>
+							Graph
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" (click)="changeView('report')">
+							<mat-icon svgIcon="report"> </mat-icon>
+							Report
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" (click)="changeView('limits')">
+							<mat-icon svgIcon="limits"> </mat-icon>
+							Budgets
+						</a>
+					</li>
+					<!-- <li class="nav-item">
+						<a class="nav-link" (click)="changeView('settings')">
+							<mat-icon>settings</mat-icon>
+							Settings
+						</a>
+					</li> -->
+				</ul>
+			</div>
+		</nav>
+		<live *ngIf="view ==='live'"></live>
+		<chart *ngIf="view ==='graph'" [format]="format" [time]="time"></chart>
+		<report *ngIf="view ==='report'" [format]="format" [time]="time"></report>
+		<limits *ngIf="view ==='limits'"></limits>
+		<!-- <settings *ngIf="view ==='settings'"></settings> -->
+	</mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,20 @@
+<div fxLayout fxLayout.sm="column" fxLayoutAlign="center stetch" *ngIf="liveReadings">
+    <div >
+        <div fxFlex="100%" style="height:84vh; margin: 20px;">
+            <mat-card-title *ngIf="liveReadings.label">{{liveReadings.label.format('dddd DD MMMM YYYY, HH:mm:ss')}} ({{liveReadings.timeDiff}} Seconds Ago)</mat-card-title>
+            <br>
+            <br>
+            <google-chart *ngIf='liveReadings.t !== null' [data]="sankeyData"></google-chart>
+            <div *ngIf='liveReadings.t === null'>
+                <h3>No data received in past 2 minutes</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="loading" align="middle" style="margin: 20px">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        <h5 class="h5 mb-3 font-weight-normal text-center">Loading Live Data</h5>
+        <p>
+            <small>Please wait, should be done shortly.</small>
+        </p>
+    </div>

@@ -1,0 +1,39 @@
+<mat-card *ngIf="updateEmmForm">
+    <mat-card-title>Update EMM</mat-card-title>
+    <mat-card-content>
+                <form  [formGroup]="updateEmmForm" (ngSubmit)="onSubmit()">
+        <h3>EMM Details</h3>
+        <mat-form-field class="form-group">
+                <input matInput type="string" placeholder="Name" class="form-control" formControlName="name"> 
+        </mat-form-field>
+        <br>
+        <mat-form-field class="form-group">
+                <input matInput type="string" placeholder="Description" class="form-control" formControlName="description"> 
+        </mat-form-field>
+        
+        <br>
+        <label>EMM Status: </label>
+        <br>
+        <mat-radio-group class="form-control" formControlName="status">
+          <mat-radio-button value="Active">Active</mat-radio-button>
+          <mat-radio-button value="Inactive">Inactive</mat-radio-button>
+          <mat-radio-button value="Testing">Testing</mat-radio-button>
+        </mat-radio-group> 
+        <h3>EMM Properties</h3>
+        <mat-form-field>
+                <input matInput type="string" placeholder="Hardware Version" class="form-control" formControlName="hardware_version"> 
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+                <input matInput type="string" placeholder="Firmware Version" class="form-control" formControlName="firmware_version"> 
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+                <input matInput type="number" placeholder="Number of Ports" class="form-control" formControlName="ports"> 
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Update</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+

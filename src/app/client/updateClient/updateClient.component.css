@@ -1,0 +1,13 @@
+mat-card {
+    margin-left: 10px;
+    margin-top: 10px;
+    
+}
+
+mat-raised-button {
+    width: 350px;
+}
+
+.emmActive{
+    color: #32f320
+}

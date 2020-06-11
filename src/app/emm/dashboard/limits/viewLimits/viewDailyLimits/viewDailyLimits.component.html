@@ -1,0 +1,120 @@
+<div style="margin: 10px">
+    <mat-card-title *ngIf="viewingMonth">{{viewingMonth.name}} Daily Budget</mat-card-title>
+    <button mat-raised-button color="primary" (click)="clickViewMonthLimit()">Month Budgets</button>
+    <mat-card-content>
+        <p *ngIf="viewingMonth">Budget: R{{mainsMonthUsage}} / R{{viewingMonth.cost_value}}</p>
+        <p *ngIf="viewingMonth.dailyAverage">Daily Average: R{{viewingMonth.dailyAverage}}</p>
+        <!-- {{viewingMonth | json}} -->
+
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Day</th>
+                    <th scope="col">Actual</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let day of dayLimitsTable" [ngClass]="{'table-secondary': day.past, 'table-success': day.today}">
+                    <td>{{day.name}}</td>
+                    <td>R{{day.actual}}</td>
+                    <td>
+                        <span *ngIf="!day.budget && day.activity === 'none'">
+                            No Budget Set
+                        </span>
+                        <span *ngIf="day.budget > 0 && day.activity === 'none'">
+                            R{{day.budget}}
+                        </span>
+                        <span *ngIf="day.activity === 'add'">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">R</div>
+                                </div>
+                                <input type="number" class="form-control" id="inlineFormInputGroup" [(ngModel)]="costValue" placeholder="Amount">
+                            </div>
+                        </span>
+                        <span *ngIf="day.activity === 'edit'">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">R</div>
+                                </div>
+                                <input type="number" class="form-control" id="inlineFormInputGroup" [(ngModel)]="costValue" placeholder="Amount">
+                            </div>
+                        </span>
+                    </td>
+                    <td>
+                        <!-- NO ACTIVITY AND PAST -->
+                        <span *ngIf="day.activity === 'none' && day.past">
+                            <span *ngIf="day.limit">
+                                <span *ngIf="day.actual > day.budget">
+                                    <button class="btn btn-danger btn-sm ">
+                                        Exceeded
+                                    </button>
+                                </span>
+                                <span *ngIf="day.actual <= day.budget">
+                                    <button class="btn btn-success btn-sm ">
+                                        Kept
+                                    </button>
+                                </span>
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <!-- NO ACTIVITY  -->
+                        <span *ngIf="day.activity === 'none'">
+                            <!-- NO ACTIVTY AND TODAY -->
+                            <span *ngIf="day.today && day.explicit">
+                                <button mat-button (click)="clickUpdateLimit(day)">
+                                    <mat-icon>edit</mat-icon>
+                                    Edit Limit
+                                </button>
+                            </span>
+                            <span *ngIf="day.today && !day.explicit">
+                                <button mat-button (click)="clickSetLimit(day)">
+                                    <mat-icon>add</mat-icon>
+                                    Set Limit
+                                </button>
+                            </span>
+                            <!-- NO ACTIVITY AND FUTURE -->
+                            <span *ngIf="day.future && day.explicit">
+                                <button mat-button (click)="clickUpdateLimit(day)">
+                                    <mat-icon>edit</mat-icon>
+                                    Edit Limit
+                                </button>
+                            </span>
+                            <span *ngIf="day.future && !day.explicit">
+                                <button mat-button (click)="clickSetLimit(day)">
+                                    <mat-icon>add</mat-icon>
+                                    Set Limit
+                                </button>
+                            </span>
+                        </span>
+                        <!-- ADDING LIMIT -->
+                        <span *ngIf="day.activity === 'add'">
+                            <button mat-button (click)="addLimit(day.date)">
+                                <mat-icon>edit</mat-icon>
+                                Add
+                            </button>
+                            <button mat-button (click)="cancelAddLimit(day.date)">
+                                Cancel
+                            </button>
+                        </span>
+                        <!-- EDITINIG LIMIT -->
+                        <span *ngIf="day.activity === 'edit'">
+                            <button mat-button (click)="editLimit(day.date)">
+                                <mat-icon>edit</mat-icon>
+                                Update
+                            </button>
+                            <button mat-button (click)="cancelAddLimit(day.date)">
+                                Cancel
+                            </button>
+                        </span>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</div>

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Limits</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#limitOptions" aria-controls="limitOptions"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span ></span>
+            <mat-icon svgIcon="limits"> </mat-icon>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="limitOptions">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Active Limits
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" *ngIf="activeLimits">
+                        <a class="dropdown-item" (click)="viewActive('day')" [ngClass]="{'disabled': activeLimits.day === undefined}">Daily Limit</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" (click)="viewActive('month')" [ngClass]="{'disabled': activeLimits.month === undefined}">Monthly Limit</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="changeView('view')">View Limits</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container-fluid">
+    <active-limits *ngIf="view ==='active' && activeLimit !== null" [activeLimit]="activeLimit" [activeType]="activeType"></active-limits>
+    <view-limits *ngIf="view ==='view'" [emmDetails]="emmDetails" [dayLimits]="dayLimits" [monthLimits]="monthLimits"></view-limits>
+</div>

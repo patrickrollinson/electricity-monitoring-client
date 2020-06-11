@@ -1,0 +1,34 @@
+<div class="container">
+    <form>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <h3>Make an enquiry</h3>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="nameField" placeholder="Enter name">
+          </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="emailField" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="enquiryField">Enquiry</label>
+            <textarea class="form-control" id="enquiryField" rows="3"></textarea>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+      <br/>
+      <input type="submit" value="Submit">
+      </form>
+
+
+  <form>
+    <h3>Order a device</h3>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

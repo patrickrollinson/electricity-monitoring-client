@@ -1,0 +1,42 @@
+<div fxLayout fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center stretch" *ngIf="emmDetails">
+    <mat-card *ngIf="emmDetails" fxFlex>
+        <mat-card-title-group>
+            <mat-card-title>
+                {{emmDetails.name}}
+            </mat-card-title>
+            <!-- <mat-icon (click)='openUpdateEmm()'>edit</mat-icon> -->
+            <button mat-button (click)='openUpdateEmm()'>
+                <mat-icon>edit</mat-icon>
+                Edit
+            </button>
+            <mat-card-subtitle>EMM Description: {{emmDetails.description}}</mat-card-subtitle>
+            <mat-card-subtitle [ngClass]="{emmActive: emmDetails.status=='Active'}">Status: {{emmDetails.status}}</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>
+            <h6>EMM Setup</h6>
+            <p>EMM Setup Confirmation Email:
+                <button *ngIf="emmDetails.once_off_notifications.emm_setup_confirmation === null" mat-button (click)="sendSetupConfirmationEmail()">
+                    <mat-icon>send</mat-icon>
+                    Send
+                </button>
+                <span *ngIf="emmDetails.once_off_notifications.emm_setup_confirmation !== null">
+                    Sent
+                </span>
+            </p>
+        </mat-card-content>
+        <mat-card-content>
+            <h6>EMM Properties</h6>
+            <p>Hardware Version: {{emmDetails.hardware_version}}</p>
+            <p>Firmare Version: {{emmDetails.firmware_version}} </p>
+            <p>Last Firmware Update: Need to add Db</p>
+            <p>Ports: {{emmDetails.ports_active.length}} / {{emmDetails.ports}} </p>
+            <br>
+            <h6>Installion Details</h6>
+            <p>Installion Date: {{emmDetails.installion_date}}</p>
+            <p>Installion By: {{emmDetails.installion_by}}</p>
+        </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex>
+        <circuits [emmDetails]="emmDetails"></circuits>
+    </mat-card>
+</div>

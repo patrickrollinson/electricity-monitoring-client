@@ -1,0 +1,21 @@
+<div class="container client-emms" *ngIf="clientDetails" style="width: 100%; max-width: 330px; padding: 15px; margin: 0 auto;">
+
+	<div style="margin-top: 40px">
+		<img src='assets/icons/logo.svg' align="middle" width="300">
+	</div>
+	<br>
+	<h5 class="h5 mb-3 font-weight-normal text-center">Please select a device</h5>
+	<mat-nav-list>
+		<mat-list-item *ngFor="let emm of clientDetails.emms_installed" [ngClass]="{emmActive: emm.status=='Active'}" (click)=viewEmm(emm._id)>
+			<mat-icon matListIcon svgIcon="emm"></mat-icon>
+			<h3 matLine>{{emm.name}} - {{emm.status}}</h3>
+		</mat-list-item>
+	</mat-nav-list>
+
+
+
+</div>
+
+<div class="container">
+
+</div>

@@ -1,0 +1,21 @@
+.timeSelected{
+    color: #32f320
+}
+
+.change-time-chevron-left{
+    width: 10%;
+}
+.change-time-chevron-right{
+    width: 10%;
+}
+.select-time-button{
+    width: 75%;
+}
+#dashboardOptions{
+    display: flex;
+    justify-content: center;
+    width: 400px;
+}
+#sidenav-close-button{
+    width: 100%;
+}
